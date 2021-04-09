@@ -3,27 +3,11 @@ import React, { useReducer, useContext, createContext } from "react";
 const ListsStateContext = createContext();
 const ListsDispatchContext = createContext();
 
-let listId = 2;
-let cardId = 4;
+let cardId = 2;
 const initialState = {
-  lists: [
-    {
-      title: "Last Episode",
-      id: 0,
-      cards: [
-        { id: 0, text: "smth" },
-        { id: 1, text: "smth1" },
-      ],
-    },
-    {
-      title: "This Episode",
-      id: 1,
-      cards: [
-        { id: 0, text: "this one" },
-        { id: 1, text: "this second" },
-        { id: 2, text: "this third" },
-      ],
-    },
+  cards: [
+    { text: "smth", id: 0, completed: false },
+    { text: "smthinteresting", id: 1, completed: false },
   ],
 };
 
@@ -35,25 +19,44 @@ const listsReducer = (state, action) => {
         text: action.payload.text,
       };
       cardId += 1;
-      const newLists = state.lists.map((list) => {
-        if (list.id === action.payload.listId) {
-          return { ...list, cards: [...list.cards, newCard] };
-        } else {
-          return list;
-        }
-      });
-      console.log(newLists)
-      return { ...state, lists: newLists };
+      return { ...state, cards: [...state.cards, newCard] };
     }
-    case "ADD_LIST": {
-      const newList = {
-        title: action.payload,
-        id: listId,
-        cards: [],
-      };
-
-      listId += 1;
-      return { ...state, lists: [...state.lists, newList] };
+    case "REMOVE_CARD": {
+      const newCards = state.cards.filter(
+        (item) => item.id != action.payload.id
+      );
+      return { ...state, cards: newCards };
+    }
+    case "EDIT_CARD": {
+      const newCards = state.cards.map((item) => {
+        if (item.id === action.payload.id) {
+          item.text = action.payload.text;
+        }
+        return item;
+      });
+      return { ...state, cards: newCards };
+    }
+    case "ADD_FROM_JSON": {
+      const newCards = action.payload.data.map((item) => {
+        const card = {
+          text: item.text,
+          completed: item.completed,
+          id: cardId,
+        };
+        cardId += 1;
+        return card;
+      });
+      return { ...state, cards: [...state.cards, newCards] };
+    }
+    case "COMPLETE_TASK": {
+      const newCards = state.cards.map((item) => {
+        if (item.id == action.payload.id) {
+          console.log("here");
+          item.completed = true;
+        }
+        return item;
+      });
+      return { ...state, cards: newCards };
     }
     default:
       return state;
@@ -62,15 +65,37 @@ const listsReducer = (state, action) => {
 
 const ListsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(listsReducer, initialState);
+  const addCard = (text) => {
+    dispatch({ type: "ADD_CARD", payload: { text } });
+  };
+  const removeCard = (id) => {
+    dispatch({ type: "REMOVE_CARD", payload: { id } });
+  };
 
-  const addList = (title) => dispatch({ type: "ADD_LIST", payload: title });
-  const addCard = (text, listId) => {
-    dispatch({ type: "ADD_CARD", payload: { text, listId } });
+  const editCard = (id, text) => {
+    dispatch({ type: "EDIT_CARD", payload: { id, text } });
+  };
+
+  const addFromJson = (data) => {
+    dispatch({ type: "ADD_FROM_JSON", payload: { data } });
+  };
+
+  const completeTask = (id) => {
+    dispatch({ type: "COMPLETE_TASK", payload: { id } });
   };
 
   return (
     <ListsStateContext.Provider value={state}>
-      <ListsDispatchContext.Provider value={{ dispatch, addList, addCard }}>
+      <ListsDispatchContext.Provider
+        value={{
+          dispatch,
+          addCard,
+          removeCard,
+          editCard,
+          addFromJson,
+          completeTask,
+        }}
+      >
         {children}
       </ListsDispatchContext.Provider>
     </ListsStateContext.Provider>
@@ -80,7 +105,7 @@ const ListsProvider = ({ children }) => {
 const useListsDispatch = () => {
   const context = useContext(ListsDispatchContext);
   if (context === undefined) {
-    throw new Error("useParamsDispatch must be used within a ParamsProvider");
+    throw new Error("forget about provider");
   }
   return context;
 };
@@ -88,7 +113,7 @@ const useListsDispatch = () => {
 const useListsState = () => {
   const context = useContext(ListsStateContext);
   if (context === undefined) {
-    throw new Error("useParamsState must be used within a ParamsProvider");
+    throw new Error("forget about provider");
   }
   return context;
 };
