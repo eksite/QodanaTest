@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App.jsx";
-import { ListsProvider } from "./context/index.jsx";
+import { TasksProvider } from "./context/TasksContext.jsx";
 
 ReactDOM.render(
-  <ListsProvider>
+  <TasksProvider>
     <App />
-  </ListsProvider>,
+  </TasksProvider>,
   document.getElementById("root")
 );

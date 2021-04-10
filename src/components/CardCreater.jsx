@@ -1,11 +1,11 @@
 import { Button, Card } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { useState } from "react";
-import { useListsDispatch } from "../context/index.jsx";
+import { useTasksDispatch } from "../context/TasksContext.jsx";
 
-const ActionButton = ({ list, listId }) => {
+const CardCreater = ({ list, listId }) => {
   const [text, setText] = useState("");
-  const { addCard } = useListsDispatch();
+  const { addCard } = useTasksDispatch();
 
   const handleAddCard = () => {
     if (text) {
@@ -58,4 +58,4 @@ const ActionButton = ({ list, listId }) => {
   );
 };
 
-export default ActionButton;
+export default CardCreater;
