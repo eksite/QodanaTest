@@ -21,14 +21,14 @@ const createCard = (
     id: ++cardId,
     text: text,
     completed: completed,
-    completedAt: {
-      month: completedMonth,
-      date: completedDate,
-    },
     createdAt: {
       month: createdMonth,
       date: createdDate,
     },
+    completedAt: {
+      month: completedMonth,
+      date: completedDate,
+    }  
   };
 };
 

@@ -3,7 +3,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import React, { useState } from "react";
 import { useTasksDispatch } from "../context/TasksContext.jsx";
 
-const CardCreater = ({ list, listId }) => {
+const CardCreater = () => {
   const [text, setText] = useState("");
   const { addCard } = useTasksDispatch();
 
@@ -19,11 +19,17 @@ const CardCreater = ({ list, listId }) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        margin: "0 auto",
+        marginTop: "10px",
+        marginBottom: "10px",
+      }}
+    >
       <Card
         style={{
-          minHeight: 20,
-          minWidth: 100,
           width: "70%",
           padding: "6px 8px 2px",
         }}
