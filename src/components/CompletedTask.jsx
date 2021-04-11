@@ -9,7 +9,7 @@ const TaskContainer = Styled(Card)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+  margin-bottom: 4px;
 `;
 const TypographyContent = Styled(Typography)`
   font-size: 19px;
