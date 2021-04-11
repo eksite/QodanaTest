@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useTasksState, useTasksDispatch } from "../context/TasksContext.jsx";
 import List from "./List.jsx";
+import data from "../data.json";
 
 const App = () => {
   const { addFromJson } = useTasksDispatch();
-
   const state = useTasksState();
   useEffect(() => {
-    addFromJson(JSON.parse(localStorage.getItem("cards")));
+    addFromJson(JSON.parse(localStorage.getItem("tasks")));
+    //uncomment if you want read from file
+    // addFromJson(data);
   }, []);
-
-  return <List cards={state.cards}></List>;
+  return <List tasks={state.tasks} />;
 };
 
 export default App;
