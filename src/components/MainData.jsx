@@ -39,7 +39,7 @@ const BarChartContainer = Styled.div`
   margin: 0 auto;
 `;
 
-const List = ({ tasks }) => {
+const MainData = ({ tasks }) => {
   const [showActiveTask, setShowActiveTask] = useState(true);
   const titleText = showActiveTask
     ? "Your future activities"
@@ -101,4 +101,4 @@ const List = ({ tasks }) => {
   );
 };
 
-export default List;
+export default MainData;

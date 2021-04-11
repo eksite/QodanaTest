@@ -15,7 +15,7 @@ const BarChart = () => {
   });
   const maxCompletedTasks = Math.max(...data.map((item) => item.y));
   const chartWidth = 400;
-  const chartHeight = 200;
+  const chartHeight = 225;
   const chartDomain = [0, maxCompletedTasks > 4 ? maxCompletedTasks + 1 : 5];
 
   return (

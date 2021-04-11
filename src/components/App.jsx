@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTasksState, useTasksDispatch } from "../context/TasksContext.jsx";
-import List from "./List.jsx";
+import MainData from "./MainData.jsx";
 import data from "../data.json";
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
     //uncomment if you want read from file
     // addFromJson(data);
   }, []);
-  return <List tasks={state.tasks} />;
+  return <MainData tasks={state.tasks} />;
 };
 
 export default App;
