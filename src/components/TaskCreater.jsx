@@ -58,7 +58,7 @@ const TaskCreater = () => {
     <Container>
       <TaskContainer>
         <StyledInput
-          placeholder="Enter your activity for today"
+          placeholder="Enter your activity"
           autoFocus
           value={text}
           onChange={(e) => setText(e.target.value)}

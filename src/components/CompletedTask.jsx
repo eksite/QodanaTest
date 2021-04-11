@@ -29,10 +29,10 @@ const ButtonContainer = Styled.div`
   justify 
 `;
 const ContentContainer = Styled.div`
-    display: flex;
-    width: 95%;
-    align-items: center;
-    word-break: break-all;
+  display: flex;
+  width: 95%;
+  align-items: center;
+  word-break: break-all;
 `;
 
 const CompletedTask = ({ text, id, removeTask }) => {
