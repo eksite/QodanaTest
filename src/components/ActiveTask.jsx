@@ -11,8 +11,8 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/Done";
 
 const EditInput = Styled(TextareaAutosize)` 
-    flex: 1;
-    resize: none;
+  flex: 1;
+  resize: none;
 `;
 
 const TaskContainer = Styled(Card)`
@@ -22,20 +22,20 @@ const TaskContainer = Styled(Card)`
 `;
 
 const ContentContainer = Styled.div`
-    display: flex;
-    width: 95%;
-    align-items: center;
-    word-break: break-all;
+  display: flex;
+  width: 95%;
+  align-items: center;
+  word-break: break-all;
 `;
 
 const CompleteTaskIcon = Styled(FiberManualRecordOutlinedIcon)`
-    margin-right: 5px;
-    font-size: 18px;
-    cursor: pointer;
+  margin-right: 5px;
+  font-size: 18px;
+  cursor: pointer;
 `;
 
 const TypographyContent = Styled(Typography)`
-    font-size: 19px;
+  font-size: 19px;
 `;
 
 const RemoveIcon = Styled(DeleteForeverOutlinedIcon)`
@@ -47,9 +47,9 @@ const EditIcon = Styled(EditOutlinedIcon)`
 `;
 
 const TaskContentContainer = Styled(CardContent)`
-display: flex;
-flex-direction: row;
-width: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 `;
 
 const ButtonsContainer = Styled.div`
