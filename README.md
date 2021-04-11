@@ -1,5 +1,4 @@
 Qodana Team
-
 ===========
 
 For installing you need in root directory write "npm install" (without quotes)
