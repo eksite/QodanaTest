@@ -5,7 +5,7 @@ import Styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import FiberManualRecordOutlinedIcon from '@material-ui/icons/FiberManualRecordOutlined';
 import { useTasksDispatch } from "../context/TasksContext.jsx";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DoneIcon from "@material-ui/icons/Done";
@@ -28,7 +28,7 @@ const ContentContainer = Styled.div`
     word-break: break-all;
 `;
 
-const CompleteTaskIcon = Styled(CheckCircleOutlineIcon)`
+const CompleteTaskIcon = Styled(FiberManualRecordOutlinedIcon)`
     margin-right: 5px;
     font-size: 18px;
     cursor: pointer;

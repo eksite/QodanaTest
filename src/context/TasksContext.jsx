@@ -1,5 +1,9 @@
 import React, { useReducer, useContext, createContext } from "react";
-import { getCurrentMonth, getCurrentDate } from "../utils/DateUtils.jsx";
+import {
+  getCurrentMonth,
+  getCurrentDate,
+  getCurrentYear,
+} from "../utils/DateUtils.jsx";
 const TasksStateContext = createContext();
 const TasksDispatchContext = createContext();
 
@@ -14,21 +18,25 @@ const createCard = (
   completed = false,
   createdDate = "",
   createdMonth = "",
+  createdYear = "",
   completedDate = "",
-  completedMonth = ""
+  completedMonth = "",
+  completedYear = ""
 ) => {
   return {
     id: ++cardId,
     text: text,
     completed: completed,
     createdAt: {
+      year: createdYear,
       month: createdMonth,
       date: createdDate,
     },
     completedAt: {
+      year: completedYear,
       month: completedMonth,
       date: completedDate,
-    }  
+    },
   };
 };
 
@@ -48,7 +56,8 @@ const taskReducer = (state, action) => {
         action.payload.text,
         false,
         getCurrentDate(),
-        getCurrentMonth()
+        getCurrentMonth(),
+        getCurrentYear()
       );
       const newArrayOfCards = [...state.cards, newCard];
       setToLocalStorage(newArrayOfCards);
@@ -80,8 +89,10 @@ const taskReducer = (state, action) => {
             item.completed,
             item.createdAt.date,
             item.createdAt.month,
+            item.createdAt.year,
             item.completedAt.date,
-            item.completedAt.month
+            item.completedAt.month,
+            item.completedAt.year
           );
         });
         const newArrayOfCards = [...state.cards, ...newCards];
@@ -95,6 +106,7 @@ const taskReducer = (state, action) => {
         if (item.id == action.payload.id) {
           item.completedAt.month = getCurrentMonth();
           item.completedAt.date = getCurrentDate();
+          item.completedAt.year = getCurrentYear();
           item.completed = true;
         }
         return item;

@@ -3,6 +3,7 @@ import Tasks from "./Tasks.jsx";
 import CardCreater from "./CardCreater.jsx";
 import Styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import BarChart from "./BarChart.jsx";
 
 const Container = Styled.div`
   display: flex;
@@ -32,6 +33,12 @@ const ButtonContainer = Styled.div`
   margin: 0 auto;
   align-items: center;
 `;
+const BarChartContainer = Styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin:0 auto;
+`
+
 
 const List = ({ cards }) => {
   const [showActiveTask, setShowActiveTask] = useState(true);
@@ -56,15 +63,19 @@ const List = ({ cards }) => {
       </ButtonContainer>
       <TasksContainer>
         {!showActiveTask ? (
-          cards.map((card) => {
-            if (card.completed) {
-              return (
-                <CardContainer>
-                  <Tasks key={card.id} id={card.id} text={card.text} />
-                </CardContainer>
-              );
-            }
-          })
+          <>
+            <BarChartContainer><BarChart /></BarChartContainer>
+            
+            {cards.map((card) => {
+              if (card.completed) {
+                return (
+                  <CardContainer>
+                    <Tasks key={card.id} id={card.id} text={card.text} />
+                  </CardContainer>
+                );
+              }
+            })}
+          </>
         ) : (
           <>
             <CardCreater />
