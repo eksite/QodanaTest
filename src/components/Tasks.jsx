@@ -15,7 +15,7 @@ const Tasks = ({ text, id, active, createdAt }) => {
           createdAt={createdAt}
         />
       ) : (
-        <CompletedTask text={text} id={id} />
+        <CompletedTask text={text} id={id} removeCard={removeCard}/>
       )}
     </>
   );

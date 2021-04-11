@@ -54,7 +54,8 @@ width: 100%;
 
 const ButtonsContainer = Styled.div`
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  justify 
 `;
 
 const InputContainer = Styled.div`

@@ -11,7 +11,9 @@ const Container = Styled.div`
   height: 100%;
 `;
 
-const Title = Styled.h3`
+const Title = Styled.h2`
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin: 0 auto
 `;
 
@@ -25,10 +27,10 @@ const CardContainer = Styled.div`
   margin-top: 5px;
 `;
 const ButtonContainer = Styled.div`
-display: flex;
-flex-direction: row;
-margin: 0 auto;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  align-items: center;
 `;
 
 const List = ({ cards }) => {
@@ -75,7 +77,7 @@ const List = ({ cards }) => {
                       id={card.id}
                       text={card.text}
                       createdAt={card.createdAt}
-                      active={true}
+                      active
                     />
                   </CardContainer>
                 );

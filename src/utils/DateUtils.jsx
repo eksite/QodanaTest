@@ -1,6 +1,8 @@
 import moment from 'moment';
 
-export {getCurrentMonth, getCurrentDate}
+export {getCurrentMonth, getCurrentDate, WEEK_TIMESTAMP, getCurrentDayTimeStamp}
+
+const WEEK_TIMESTAMP = 604800;
 
 const getCurrentMonth = () => {
     return moment().month();
@@ -9,3 +11,8 @@ const getCurrentMonth = () => {
 const getCurrentDate = () => {
     return moment().date()
 }
+
+const getCurrentDayTimeStamp = () => {
+    return moment().format("X");
+}
+
