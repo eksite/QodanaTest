@@ -12,7 +12,7 @@ const Container = Styled.div`
   margin-bottom: 10px;
 `;
 
-const CardContainer = Styled(Card)`
+const TaskContainer = Styled(Card)`
   width: 70%;
   padding: 6px 8px 2px;
 `;
@@ -39,33 +39,33 @@ const ClearIcon = Styled(CloseIcon)`
   cursor: pointer;
 `;
 
-const CardCreater = () => {
+const TaskCreater = () => {
   const [text, setText] = useState("");
-  const { addCard } = useTasksDispatch();
-
-  const handleAddCard = () => {
-    if (text) {
-      addCard(text);
-      setText("");
-    }
-  };
+  const { addTask } = useTasksDispatch();
 
   const clearTextField = () => {
     setText("");
   };
 
+  const handleAddTask = () => {
+    if (text) {
+      addTask(text);
+      clearTextField();
+    }
+  };
+
   return (
     <Container>
-      <CardContainer>
+      <TaskContainer>
         <StyledInput
           placeholder="Enter your activity for today"
           autoFocus
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-      </CardContainer>
+      </TaskContainer>
       <ControlButtonsContainer>
-        <StyledButton onMouseDown={handleAddCard} variant="contained">
+        <StyledButton onMouseDown={handleAddTask} variant="contained">
           Add
         </StyledButton>
         <ClearIcon onClick={clearTextField} />
@@ -74,4 +74,4 @@ const CardCreater = () => {
   );
 };
 
-export default CardCreater;
+export default TaskCreater;

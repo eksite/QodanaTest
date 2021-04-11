@@ -7,10 +7,11 @@ const App = () => {
   const { addFromJson } = useTasksDispatch();
   const state = useTasksState();
   useEffect(() => {
-    addFromJson(JSON.parse(localStorage.getItem("cards")));
-    addFromJson(data);
+    addFromJson(JSON.parse(localStorage.getItem("tasks")));
+    //uncomment if you want read from file
+    // addFromJson(data);
   }, []);
-  return <List cards={state.cards}></List>;
+  return <List tasks={state.tasks} />;
 };
 
 export default App;

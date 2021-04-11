@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tasks from "./Tasks.jsx";
-import CardCreater from "./CardCreater.jsx";
+import TaskCreater from "./TaskCreater.jsx";
 import Styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import BarChart from "./BarChart.jsx";
@@ -24,7 +24,7 @@ const TasksContainer = Styled.div`
   margin: 0 auto;
   width: 40%;
 `;
-const CardContainer = Styled.div`
+const TaskContainer = Styled.div`
   margin-top: 5px;
 `;
 const ButtonContainer = Styled.div`
@@ -36,10 +36,10 @@ const ButtonContainer = Styled.div`
 const BarChartContainer = Styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
-  margin:0 auto;
+  margin: 0 auto;
 `;
 
-const List = ({ cards }) => {
+const List = ({ tasks }) => {
   const [showActiveTask, setShowActiveTask] = useState(true);
   const titleText = showActiveTask
     ? "Your future activities"
@@ -66,31 +66,31 @@ const List = ({ cards }) => {
             <BarChartContainer>
               <BarChart />
             </BarChartContainer>
-            {cards.map((card) => {
-              if (card.completed) {
+            {tasks.map((task) => {
+              if (task.completed) {
                 return (
-                  <CardContainer>
-                    <Tasks key={card.id} id={card.id} text={card.text} />
-                  </CardContainer>
+                  <TaskContainer>
+                    <Tasks key={task.id} id={task.id} text={task.text} />
+                  </TaskContainer>
                 );
               }
             })}
           </>
         ) : (
           <>
-            <CardCreater />
-            {cards.map((card) => {
-              if (!card.completed) {
+            <TaskCreater />
+            {tasks.map((task) => {
+              if (!task.completed) {
                 return (
-                  <CardContainer>
+                  <TaskContainer>
                     <Tasks
-                      key={card.id}
-                      id={card.id}
-                      text={card.text}
-                      createdAt={card.createdAt}
+                      key={task.id}
+                      id={task.id}
+                      text={task.text}
+                      createdAt={task.createdAt}
                       active
                     />
-                  </CardContainer>
+                  </TaskContainer>
                 );
               }
             })}

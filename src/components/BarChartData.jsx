@@ -12,8 +12,8 @@ const BarChartData = () => {
     return { x: item, y: 0 };
   });
 
-  if (state.cards) {
-    state.cards.filter((item) => {
+  if (state.tasks) {
+    state.tasks.filter((item) => {
       const {
         completedAt: { year, month, date },
       } = item;
@@ -37,7 +37,6 @@ const BarChartData = () => {
       }
     });
   }
-  console.log(barChartArray)
   return barChartArray;
 };
 

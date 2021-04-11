@@ -7,13 +7,13 @@ import {
 const TasksStateContext = createContext();
 const TasksDispatchContext = createContext();
 
-let cardId = 0;
+let taskId = 0;
 
 const initialState = {
-  cards: [],
+  tasks: [],
 };
 
-const createCard = (
+const createTask = (
   text,
   completed = false,
   createdDate = "",
@@ -24,7 +24,7 @@ const createCard = (
   completedYear = ""
 ) => {
   return {
-    id: ++cardId,
+    id: ++taskId,
     text: text,
     completed: completed,
     createdAt: {
@@ -40,51 +40,51 @@ const createCard = (
   };
 };
 
-const editField = (card, field, value) => {
-  card[field] = value;
-  return card;
+const editField = (task, field, value) => {
+  task[field] = value;
+  return task;
 };
 
 const setToLocalStorage = (tasks) => {
-  localStorage.setItem("cards", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
 const taskReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_CARD": {
-      const newCard = createCard(
+    case "ADD_TASK": {
+      const newTask = createTask(
         action.payload.text,
         false,
         getCurrentDate(),
         getCurrentMonth(),
         getCurrentYear()
       );
-      const newArrayOfCards = [...state.cards, newCard];
-      setToLocalStorage(newArrayOfCards);
-      return { ...state, cards: newArrayOfCards };
+      const newArrayOfTasks = [...state.tasks, newTask];
+      setToLocalStorage(newArrayOfTasks);
+      return { ...state, tasks: newArrayOfTasks };
     }
 
-    case "REMOVE_CARD": {
-      const newCards = state.cards.filter(
+    case "REMOVE_TASK": {
+      const newTasks = state.tasks.filter(
         (item) => item.id != action.payload.id
       );
-      setToLocalStorage(newCards);
-      return { ...state, cards: newCards };
+      setToLocalStorage(newTasks);
+      return { ...state, tasks: newTasks };
     }
-    case "EDIT_CARD": {
-      const newCards = state.cards.map((item) => {
+    case "EDIT_TASK": {
+      const newTasks = state.tasks.map((item) => {
         if (item.id === action.payload.id) {
           return editField(item, "text", action.payload.text);
         }
         return item;
       });
-      setToLocalStorage(newCards);
-      return { ...state, cards: newCards };
+      setToLocalStorage(newTasks);
+      return { ...state, tasks: newTasks };
     }
     case "ADD_FROM_JSON": {
       if (action.payload.data) {
-        const newCards = action.payload.data.map((item) => {
-          return createCard(
+        const newTasks = action.payload.data.map((item) => {
+          return createTask(
             item.text,
             item.completed,
             item.createdAt.date,
@@ -95,28 +95,28 @@ const taskReducer = (state, action) => {
             item.completedAt.year
           );
         });
-        const newArrayOfCards = [...state.cards, ...newCards];
-        setToLocalStorage(newArrayOfCards);
-        return { ...state, cards: newArrayOfCards };
+        const newArrayOfTasks = [...state.tasks, ...newTasks];
+        setToLocalStorage(newArrayOfTasks);
+        return { ...state, tasks: newArrayOfTasks };
       }
       return state;
     }
     case "CLEAR_ALL_COMPLETED_TASK": {
-      if (state.cards) {
-        const newCards = state.cards.filter((item) => item.completed === false);
-        return { ...state, cards: newCards };
+      if (state.tasks) {
+        const newTasks = state.tasks.filter((item) => item.completed === false);
+        return { ...state, tasks: newTasks };
       }
       return state;
     }
     case "CLEAR_ALL_ACTIVE_TASK": {
-      if (state.cards) {
-        const newCards = state.cards.filter((item) => item.completed === true);
-        return { ...state, cards: newCards };
+      if (state.tasks) {
+        const newTasks = state.tasks.filter((item) => item.completed === true);
+        return { ...state, tasks: newTasks };
       }
       return state;
     }
     case "COMPLETE_TASK": {
-      const newCards = state.cards.map((item) => {
+      const newTasks = state.tasks.map((item) => {
         if (item.id == action.payload.id) {
           item.completedAt.month = getCurrentMonth();
           item.completedAt.date = getCurrentDate();
@@ -125,8 +125,8 @@ const taskReducer = (state, action) => {
         }
         return item;
       });
-      setToLocalStorage(newCards);
-      return { ...state, cards: newCards };
+      setToLocalStorage(newTasks);
+      return { ...state, tasks: newTasks };
     }
     default:
       return state;
@@ -135,15 +135,15 @@ const taskReducer = (state, action) => {
 
 const TasksProvider = ({ children }) => {
   const [state, dispatch] = useReducer(taskReducer, initialState);
-  const addCard = (text) => {
-    dispatch({ type: "ADD_CARD", payload: { text } });
+  const addTask = (text) => {
+    dispatch({ type: "ADD_TASK", payload: { text } });
   };
-  const removeCard = (id) => {
-    dispatch({ type: "REMOVE_CARD", payload: { id } });
+  const removeTask = (id) => {
+    dispatch({ type: "REMOVE_TASK", payload: { id } });
   };
 
-  const editCard = (id, text) => {
-    dispatch({ type: "EDIT_CARD", payload: { id, text } });
+  const editTask = (id, text) => {
+    dispatch({ type: "EDIT_TASK", payload: { id, text } });
   };
 
   const addFromJson = (data) => {
@@ -167,9 +167,9 @@ const TasksProvider = ({ children }) => {
       <TasksDispatchContext.Provider
         value={{
           dispatch,
-          addCard,
-          removeCard,
-          editCard,
+          addTask,
+          removeTask,
+          editTask,
           addFromJson,
           completeTask,
           clearAllCompletedTask,

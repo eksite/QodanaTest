@@ -15,7 +15,7 @@ const EditInput = Styled(TextareaAutosize)`
     resize: none;
 `;
 
-const CardContainer = Styled(Card)`
+const TaskContainer = Styled(Card)`
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -46,7 +46,7 @@ const EditIcon = Styled(EditOutlinedIcon)`
   cursor: pointer;
 `;
 
-const CardContentContainer = Styled(CardContent)`
+const TaskContentContainer = Styled(CardContent)`
 display: flex;
 flex-direction: row;
 width: 100%;
@@ -63,10 +63,10 @@ const InputContainer = Styled.div`
   flex-basis: 100%
 `;
 
-const ActiveTask = ({ removeCard, text, id, createdAt }) => {
+const ActiveTask = ({ removeTask, text, id, createdAt }) => {
   const [editedText, setEditedText] = useState(text);
   const [editToggle, setEditToggle] = useState(false);
-  const { editCard, completeTask } = useTasksDispatch();
+  const { editTask, completeTask } = useTasksDispatch();
 
   const comfirmCompletedTask = () => {
     completeTask(id);
@@ -74,15 +74,15 @@ const ActiveTask = ({ removeCard, text, id, createdAt }) => {
 
   const editText = () => {
     if (!editedText) {
-      removeCard(id);
+      removeTask(id);
       return;
     }
-    editCard(id, editedText);
+    editTask(id, editedText);
     toggle();
   };
 
   const removeItem = () => {
-    removeCard(id);
+    removeTask(id);
   };
 
   const toggle = () => {
@@ -95,9 +95,8 @@ const ActiveTask = ({ removeCard, text, id, createdAt }) => {
   };
 
   return (
-    
-      <CardContainer>
-        <CardContentContainer>
+      <TaskContainer>
+        <TaskContentContainer>
           {editToggle ? (
             <InputContainer>
               <EditInput value={editedText} onChange={handleInput} autoFocus />
@@ -118,8 +117,8 @@ const ActiveTask = ({ removeCard, text, id, createdAt }) => {
               </>
             )}
           </ButtonsContainer>
-        </CardContentContainer>
-      </CardContainer>
+        </TaskContentContainer>
+      </TaskContainer>
      
     
   );

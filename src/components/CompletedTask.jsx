@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Styled from "styled-components";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
-const CardContainer = Styled(Card)`
+const TaskContainer = Styled(Card)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,7 +14,7 @@ const CardContainer = Styled(Card)`
 const TypographyContent = Styled(Typography)`
   font-size: 19px;
 `;
-const CardContentContainer = Styled(CardContent)`
+const TaskContentContainer = Styled(CardContent)`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -35,21 +35,21 @@ const ContentContainer = Styled.div`
     word-break: break-all;
 `;
 
-const CompletedTask = ({ text, id, removeCard }) => {
+const CompletedTask = ({ text, id, removeTask }) => {
   const removeItem = () => {
-    removeCard(id);
+    removeTask(id);
   };
   return (
-    <CardContainer>
-      <CardContentContainer>
+    <TaskContainer>
+      <TaskContentContainer>
         <ContentContainer>
           <TypographyContent>{text}</TypographyContent>
         </ContentContainer>
         <ButtonContainer>
           <RemoveIcon onClick={removeItem} />
         </ButtonContainer>
-      </CardContentContainer>
-    </CardContainer>
+      </TaskContentContainer>
+    </TaskContainer>
   );
 };
 

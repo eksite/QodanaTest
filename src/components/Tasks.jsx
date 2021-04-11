@@ -4,18 +4,18 @@ import ActiveTask from "./ActiveTask.jsx";
 import CompletedTask from "./CompletedTask.jsx";
 
 const Tasks = ({ text, id, active, createdAt }) => {
-  const { removeCard } = useTasksDispatch();
+  const { removeTask } = useTasksDispatch();
   return (
     <>
       {active ? (
         <ActiveTask
-          removeCard={removeCard}
+          removeTask={removeTask}
           id={id}
           text={text}
           createdAt={createdAt}
         />
       ) : (
-        <CompletedTask text={text} id={id} removeCard={removeCard}/>
+        <CompletedTask text={text} id={id} removeTask={removeTask} />
       )}
     </>
   );
