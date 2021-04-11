@@ -37,8 +37,7 @@ const BarChartContainer = Styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
   margin:0 auto;
-`
-
+`;
 
 const List = ({ cards }) => {
   const [showActiveTask, setShowActiveTask] = useState(true);
@@ -64,8 +63,9 @@ const List = ({ cards }) => {
       <TasksContainer>
         {!showActiveTask ? (
           <>
-            <BarChartContainer><BarChart /></BarChartContainer>
-            
+            <BarChartContainer>
+              <BarChart />
+            </BarChartContainer>
             {cards.map((card) => {
               if (card.completed) {
                 return (

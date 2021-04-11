@@ -101,6 +101,20 @@ const taskReducer = (state, action) => {
       }
       return state;
     }
+    case "CLEAR_ALL_COMPLETED_TASK": {
+      if (state.cards) {
+        const newCards = state.cards.filter((item) => item.completed === false);
+        return { ...state, cards: newCards };
+      }
+      return state;
+    }
+    case "CLEAR_ALL_ACTIVE_TASK": {
+      if (state.cards) {
+        const newCards = state.cards.filter((item) => item.completed === true);
+        return { ...state, cards: newCards };
+      }
+      return state;
+    }
     case "COMPLETE_TASK": {
       const newCards = state.cards.map((item) => {
         if (item.id == action.payload.id) {
@@ -140,6 +154,14 @@ const TasksProvider = ({ children }) => {
     dispatch({ type: "COMPLETE_TASK", payload: { id } });
   };
 
+  const clearAllCompletedTask = () => {
+    dispatch({ type: "CLEAR_ALL_COMPLETED_TASK" });
+  };
+
+  const clearAllActiveTask = () => {
+    dispatch({ type: "CLEAR_ALL_ACTIVE_TASK" });
+  };
+
   return (
     <TasksStateContext.Provider value={state}>
       <TasksDispatchContext.Provider
@@ -150,6 +172,8 @@ const TasksProvider = ({ children }) => {
           editCard,
           addFromJson,
           completeTask,
+          clearAllCompletedTask,
+          clearAllActiveTask,
         }}
       >
         {children}
